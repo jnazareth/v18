@@ -4,6 +4,7 @@
 -------------------
 history
 -------------------
+v17: group implementation
 v16: cleanup: created separete account, removed static declarations
 v15: added category & vendor
 v14: bug fix individual transaction amt

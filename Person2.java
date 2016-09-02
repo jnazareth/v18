@@ -3,13 +3,13 @@
 public class Person2 extends Object {
 
 	// enum
-    private final int FROM = 0;
-	private final int TO = 1;
-	private final int SYS_SUM = 2;
-	private final int IND_SUM = 3;
-	private final int CHK_SUM = 4;
-	private final int CHK_INDSUM = 5;
-	private final int TRANS_AMT = 6;
+    public final int FROM = 0;
+	public final int TO = 1;
+	public final int SYS_SUM = 2;
+	public final int IND_SUM = 3;
+	public final int CHK_SUM = 4;
+	public final int CHK_INDSUM = 5;
+	public final int TRANS_AMT = 6;
 
     private final int eSTART = FROM;
     private final int eEND = TRANS_AMT;

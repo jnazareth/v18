@@ -1,0 +1,7 @@
+javac gp2.java
+
+java gp2 gp11.names2.csv > gp11.names2.out.csv
+
+java gp2 nov2015\jill.nov.csv
+
+java gp2 gp11.names4.csv

@@ -874,6 +874,39 @@ public class account
 	}
 
 
+	// Find_CreateGroup
+	Hashtable<String, Person2> Find_CreateGroup(String sGrpName)
+	{
+		// find group
+		try {
+			Hashtable<String, Person2> aGrp = m_GroupCollection.get(sGrpName) ;
+			if (aGrp == null) {
+				aGrp = new Hashtable<String, Person2>() ;
+				m_GroupCollection.put(sGrpName, aGrp) ;
+			} else {
+				// found, do nothing
+			}
+			return aGrp ;
+		} catch (Exception e){
+			System.err.println("Error: " + e.getMessage());
+			return null ;
+		}
+	}
+
+	// getAction: get specific action
+	String getAction(int lR, String sA)
+	{
+		String sAct = "" ;
+		// get action
+		int idS = 0 ;
+		if ( ((idS = sA.indexOf(ID_SEPARATOR)) != -1) )
+			sAct = sA.substring(lR+1, idS).trim() ;
+		else
+			System.err.println("Action not specified: " + sA);
+
+		return sAct ;
+	}
+
 	// doAction: process input action
 	// name1 (*/+/-:self), name2 (*/+/-:self): add/enable/disable individuals
 	// group1 (*/+/-:group): add/enable/disable group
@@ -891,40 +924,20 @@ public class account
 			while (st.hasMoreTokens()) {
 				sActs = st.nextToken() ;
 
-				//System.out.println("sActs: " + sActs + ", " + bGroup + "," + bInd);
-
 				int lR = 0, rR = 0 ;
 				String aName = "", aGroup = DEFAULT_GROUP ;
 				if ( ((lR = sActs.indexOf(ID_lR)) != -1) && ((rR = sActs.indexOf(ID_rR)) != -1) ) {	// valid construct
 						// get name: self or group
 						if ( (bInd = sActs.contains(SELF)) ) {
 							aName = sActs.substring(0, lR).trim() ;
-
-							//System.out.println("aName: " + aName);
-
-							// get action
-							int idS = 0 ;
-							if ( ((idS = sActs.indexOf(ID_SEPARATOR)) != -1) )
-								sIndAct = sActs.substring(lR+1, idS).trim() ;
-							else
-								System.err.println("Action not specified: " + action);
-
-							//System.out.println("sIndAct: " + sIndAct);
+							sIndAct = getAction(lR, sActs) ;
 						}
 						else if ( (bGroup = sActs.contains(GROUP)) ) {
 							aGroup = sActs.substring(0, lR).trim() ;
-
-							// get action
-							int idS = 0 ;
-							if ( ((idS = sActs.indexOf(ID_SEPARATOR)) != -1) )
-								sGrpAct = sActs.substring(lR+1, idS).trim() ;
-							else
-								System.err.println("Action not specified: " + action);
+							sGrpAct = getAction(lR, sActs) ;
 						}
 						else
 							; //System.err.println("Individual or Group not specified: " + action);
-
-					//System.out.println(aName + ID_SEPARATOR + sIndAct + ", " + aGroup + ID_SEPARATOR + sGrpAct);
 				}
 
 				if (bGroup) {
@@ -936,84 +949,38 @@ public class account
 				}
 
 				if (bInd) {
-					//System.out.println("bInd: " + bInd);
-
 					if (indActions == null) {
 						indActions = new ArrayList<String>() ;
 						indActions.add(aName + ID_SEPARATOR + sIndAct) ;
 					} else
 						indActions.add(aName + ID_SEPARATOR + sIndAct) ;
-					//System.out.println("IND aAction:" + indActions.size());
 				}
 			} // while
 
-
 			// Create Collections
-			if (m_GroupCollection == null) {
-				m_GroupCollection = new Hashtable<String, Hashtable<String, Person2>>() ;
-
-				//System.out.println("m_GroupCollection created");
-			}
+			if (m_GroupCollection == null) m_GroupCollection = new Hashtable<String, Hashtable<String, Person2>>() ;
 
 			String sGrpName = DEFAULT_GROUP ;
-			//System.out.println("CHECK bGroup:" + bGroup);
-			if (/*bGroup */ grpActions != null) {
-
+			if (grpActions != null) {
 				for (String aAction : grpActions) {
 					int idS = -1 ;
 					if ( ((idS = aAction.indexOf(ID_SEPARATOR)) != -1) ) {
 						sGrpName = aAction.substring(0, idS).trim() ;
 						sGrpAct = aAction.substring(idS+1, aAction.length()).trim() ;
-
-						//System.out.println(sGrpName + ID_SEPARATOR + sGrpAct);
-
-						// find group
-						try {
-							Hashtable<String, Person2> aGrp = m_GroupCollection.get(sGrpName) ;
-							if (aGrp == null) {
-								//System.out.println(sGrpName + " not found");
-
-								aGrp = new Hashtable<String, Person2>() ;
-								m_GroupCollection.put(sGrpName, aGrp) ;
-
-								//dumpCollection() ;
-							} else {
-								// found, do nothing
-								//System.out.println(sGrpName + " found, do nothing");
-							}
-						} catch (Exception e){
-							System.err.println("Error: " + e.getMessage());
-						}
+						Find_CreateGroup(sGrpName) ;
 					}
 				}
 			}
 
-			//System.out.println("CHECK bInd:" + bInd);
-			if (/* bInd */ indActions != null) {
-
+			if (indActions != null) {
 				for (String aAction : indActions) {
 					int idS = -1 ;
 					if ( ((idS = aAction.indexOf(ID_SEPARATOR)) != -1) ) {
 						String sIndName = aAction.substring(0, idS).trim() ;
 						sIndAct = aAction.substring(idS+1, aAction.length()).trim() ;
 
-						//System.out.println(sIndName + ID_SEPARATOR + sIndAct);
-
-						// find group
 						try {
-							//System.out.println("looking for group name: " + sGrpName);
-
-							Hashtable<String, Person2> aGrp = m_GroupCollection.get(sGrpName) ;
-							if (aGrp == null) { // not found
-								//System.out.println(sGrpName + " not found, put");
-
-								aGrp = new Hashtable<String, Person2>() ;
-								m_GroupCollection.put(sGrpName, aGrp) ;
-
-								//dumpCollection() ;
-
-							}
-							//System.out.println("looking for name: " + sIndName);
+							Hashtable<String, Person2> aGrp = Find_CreateGroup(sGrpName) ;
 
 							Person2 aPn = aGrp.get(sIndName);
 							if (aPn != null) { // found, flip enable/disable
@@ -1031,16 +998,13 @@ public class account
 									aGrp.put(sIndName, aPerson) ;
 								}
 							}
-
 							//dumpCollection() ;
-
 						} catch (Exception e){
 							System.err.println("Error:doAction " + e.getMessage());
 						}
 					}
 				}
 			}
-
 		} // action
 	}
 

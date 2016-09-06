@@ -527,6 +527,9 @@ public class account
 		try {
 			m_bClearing = false ;
 
+			doAction(action) ;
+			dumpCollection() ;
+
 			// process Action
 			if (action.length() != 0) {
 				StringTokenizer st = new StringTokenizer(action, ITEM_SEPARATOR);
@@ -874,6 +877,23 @@ public class account
 	}
 
 
+	// getPersons
+	Hashtable<String, Person2> getPersons(String sGrpName)
+	{
+		// find group
+		try {
+			Hashtable<String, Person2> persons = m_GroupCollection.get(sGrpName) ;
+			if (persons != null) {
+			} else {
+				// not found, error !
+			}
+			return persons ;
+		} catch (Exception e){
+			System.err.println("Error: " + e.getMessage());
+			return null ;
+		}
+	}
+
 	// Find_CreateGroup
 	Hashtable<String, Person2> Find_CreateGroup(String sGrpName)
 	{
@@ -998,7 +1018,6 @@ public class account
 									aGrp.put(sIndName, aPerson) ;
 								}
 							}
-							//dumpCollection() ;
 						} catch (Exception e){
 							System.err.println("Error:doAction " + e.getMessage());
 						}
@@ -1065,20 +1084,13 @@ public class account
 					if (sLine.length() == 0) continue ;
 					if (item.charAt(0) == COMMENT) continue ; // comment, skip
 
-					doAction(action) ;
-					dumpCollection() ;
-
-					/* GROUP test
 					ProcessTransaction(item, desc, amt, from, to, action, def) ;
 					prepareToExport(item, category, vendor, desc, amt, from, to, action, def) ;
-					*/
 				} // end of while
 				buffReader.close() ;
 				////System.out.println("map: " + m_Transactions.toString()); // dump HashMap
 
-				/* GROUP test
 				if (bExport) exportToCSV(fileName) ;
-				*/
 			} catch (IOException e) {
 				////System.out.println("There was a problem reading:" + fileName);
 			}

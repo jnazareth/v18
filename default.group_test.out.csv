@@ -1,0 +1,4 @@
+								transaction amounts(you owe) / owed to you	individual totals
+Item	Category	Vendor	Description	Amount	From	To	Action	gd	jn	gd	jn	CheckSum	gd	jn	IndCheckSum
+10.Aug.1	groceries	aldi	milk, bread, etc	50	jn	all	jn (*:self), gd (*:self)	25.00	25.00	-25.00	25.00	0.00	25.00	25.00	0.00
+13-Aug.1	groceries	sam's	chicken, fish, etc	70.25	gd	jn, gd		35.13	35.13	10.13	-10.13	0.00	60.13	60.13	0.00

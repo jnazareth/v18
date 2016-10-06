@@ -1,0 +1,6 @@
+								transaction amounts(you owe) / owed to you	individual totals
+Item	Category	Vendor	Description	Amount	From	To	Action	cy	gd	jn	cy	gd	jn	CheckSum	cy	gd	jn	IndCheckSum
+11.Aug.1	restaurant	bierhause	beers, snacks	78	gd:20, jn:58	jn, cy, gd	jn (*:self), gd (*:self), cy (*:self), cy trip (*:group)	26.00	26.00	26.00	-26.00	-6.00	32.00	0.00	26.00	26.00	26.00	0.00
+12.Aug.1	gas	mobil	gas	21	gd	all		7.00	7.00	7.00	-33.00	8.00	25.00	0.00	33.00	33.00	33.00	0.00
+14-Aug.1	travel	njtransit	bus tickets	35.00	jn	jn:10, 25:rem		12.50	12.50	10.00	-45.50	-4.50	50.00	0.00	45.50	45.50	43.00	0.00
+14-Aug.2	restaurant	chipotle	lunch	46.00	cy:16, gd:30	all		15.33	15.33	15.33	-44.83	10.17	34.67	0.00	60.83	60.83	58.33	0.00

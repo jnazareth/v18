@@ -1,7 +1,18 @@
+For example, you would like to see transactions from May 01, 2016 to July 31, 2016 only, then the URL should look like this:                                 https://wwws.mint.com/transaction.event?startDate=05/01/2016&endDate=07/31/2016
+
+cd D:\personal\projects\gp\source\v17
+
 javac gp2.java
+
+jar cmf META-INF\manifest.mf gp2.jar *.class
+jar tf gp2.jar
+
+java -jar gp2.jar group_test.csv
+
 
 java gp2 gp11.names2.csv > gp11.names2.out.csv
 
 java gp2 nov2015\jill.nov.csv
 
 java gp2 gp11.names4.csv
+

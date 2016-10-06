@@ -1,2 +1,7 @@
-10.Aug.1		groceries	aldi		milk, bread, etc	50	jn		jn, gd		jn (*:self), gd (*:self)
-11.Aug.1		restaurant	bierhause	beers, snacks		78	gd:20, jn:58	jn, cy, gd	cy (*:self), cy trip (*:group)
+#date			category	vendor		desc			amt	from		to		group		action
+10.Aug.1		groceries	aldi		milk, bread, etc	50	jn		all		default		jn (*:self), gd (*:self)
+11.Aug.1		restaurant	bierhause	beers, snacks		78	gd:20, jn:58	jn, cy, gd	cy trip		jn (*:self), gd (*:self), cy (*:self), cy trip (*:group)
+12.Aug.1		gas		mobil		gas			21	gd		all		cy trip
+13-Aug.1		groceries	sam's		chicken, fish, etc	70.25	gd		jn, gd	
+14-Aug.1		travel		njtransit	bus tickets		35.00	jn		jn:10, 25:rem	cy trip
+14-Aug.2		restaurant	chipotle	lunch			46.00	cy:16, gd:30	all		cy trip

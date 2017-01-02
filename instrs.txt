@@ -8,6 +8,7 @@ jar cmf META-INF\manifest.mf gp2.jar *.class
 jar tf gp2.jar
 
 java -jar gp2.jar group_test.csv
+java -jar gp2.jar control_test.csv
 
 
 java gp2 gp11.names2.csv > gp11.names2.out.csv

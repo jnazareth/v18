@@ -4,6 +4,7 @@
 -------------------
 history
 -------------------
+v18: control header: skip columns, skip quotes in action
 v17: group implementation
 v16: cleanup: created separete account, removed static declarations
 v15: added category & vendor

@@ -1,0 +1,10 @@
+#@item		category	vendor		description	amount	from	to	group		action
+#Thu 12.01	Gift		AliExpress	xmas shopping	29	jn	jn	xmas		jn (*:self)	 gd (*:self)	 xmas (*:group)
+#@item		vendor		category	description	amount	from	to	group		action
+#Thu 12.01	AliExpress	Gift		xmas shopping	29	jn	jn	xmas		jn (*:self)	 gd (*:self)	 xmas (*:group)
+#@vendor		item		amount	from	to	category	description	group		action
+#AliExpress	Thu 12.01	29	jn	jn	Gift		xmas shopping	xmas		jn (*:self)	 gd (*:self)	 xmas (*:group)
+#@item		category	vendor		description	account type	amount	from	to	group		action
+#Thu 12.01	Gift		AliExpress	xmas shopping	visa signature	29	jn	jn	xmas		jn (*:self)	 gd (*:self)	 xmas (*:group)
+@item		category	vendor		description	amount	transaction type	account name		from	to	group	action
+Thu 12.01	Gifts		AliExpress	xmas shopping	29	debit			Visa Signature		jn	jn	xmas	"jn (*:self),gd (*:self),xmas (*:group)"

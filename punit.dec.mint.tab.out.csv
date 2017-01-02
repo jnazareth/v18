@@ -1,0 +1,19 @@
+								transaction amounts(you owe) / owed to you	individual totals
+Item	Category	Vendor	Description	Amount	From	To	Action	gd	jn	gd	jn	CheckSum	gd	jn	IndCheckSum
+Tue 12.13	Gift	Wal-Mart	WALMART.COM 800-966-6546 AR	63.39	jn	jn,gd	jn (*:self), gd (*:self), punit (*:group)	31.69	31.69	-31.69	31.69	0.00	31.69	31.69	0.00
+Fri 12.16	Public Transportation	MTA	MTA MVM*N063A-42 STQPS NEW YORK NY	11	jn	jn,gd		5.50	5.50	-37.19	37.19	0.00	37.19	37.19	0.00
+Fri 12.16	Restaurants	Laguardia Figs Cafe	LAGUARDIA/FIGS CAFE RE FLUSHING NY	24.46	jn	jn,gd		12.23	12.23	-49.42	49.42	0.00	49.42	49.42	0.00
+Fri 12.16	Alcohol & Bars	Laguardia Figs Cafe	LAGUARDIA/FIGS CAFE RE FLUSHING NY	10.48	jn	jn		0.00	10.48	-49.42	49.42	0.00	49.42	59.90	0.00
+Sun 12.18	Entertainment	Georgia Aquarium	GEORGAAQUARIUM19142793 ATLANTA GA	19.44	jn	jn,gd		9.72	9.72	-59.15	59.15	0.00	59.15	69.63	0.00
+Sun 12.18	Entertainment	Sky View Atlanta	SKY VIEW ATLANTA ATLANTA GA	30	jn	jn,gd		15.00	15.00	-74.15	74.15	0.00	74.15	84.63	0.00
+Sun 12.18	Restaurants	Panera Bread	PANERA BREAD #3791 SMYRNA GA	14.59	jn	jn,gd		7.30	7.30	-81.44	81.44	0.00	81.44	91.92	0.00
+Mon 12.19	Restaurants	Meehans Public House	Meehans Public House D ATLANTA GA	58	jn	jn,gd		29.00	29.00	-110.44	110.44	0.00	110.44	120.92	0.00
+Mon 12.19	Restaurants	Smoke Ring	Smoke Ring ATLANTA GA	116.22	jn	jn,gd		58.11	58.11	-168.55	168.55	0.00	168.55	179.03	0.00
+Mon 12.19	Entertainment	The Center for Civil and Human Rights	NATL CTR CIV HUMAN RHT ATLANTA GA	-17.28	jn	jn,gd		-8.64	-8.64	-159.91	159.91	0.00	159.91	170.39	0.00
+Mon 12.19	Entertainment	The Center for Civil and Human Rights	NATL CTR CIV HUMAN RHT ATLANTA GA	51.84	jn	jn,gd		25.92	25.92	-185.83	185.83	0.00	185.83	196.31	0.00
+Mon 12.19	Entertainment	The Center for Civil and Human Rights	NATL CTR CIV HUMAN RHT ATLANTA GA	-17.28	jn	jn,gd		-8.64	-8.64	-177.19	177.19	0.00	177.19	187.67	0.00
+Mon 12.19	Rental Car & Taxi	Uber.com	VISA DDA PUR449215 UBER US DEC18 DXA4K HELP UBER COM * CA	16.15	jn	jn,gd		8.07	8.07	-185.26	185.26	0.00	185.26	195.74	0.00
+Tue 12.20	Public Transportation	Njt Pabt	NJT PABT 0920 NEWARK NJ	3.5	jn	gd		3.50	0.00	-188.76	188.76	0.00	188.76	195.74	0.00
+Mon 12.26	Public Transportation	Njt Pabt	NJT PABT 0973 NEWARK NJ	3.5	jn	jn		0.00	3.50	-188.76	188.76	0.00	188.76	199.24	0.00
+Tue 12.27	Gift	Kohl's	WWW.KOHLS.COM #0873 866-887-8884 OH	54.04	jn	jn,gd		27.02	27.02	-215.79	215.79	0.00	215.79	226.26	0.00
+Wed 12.28	Public Transportation	Njt Pabt Nj	NJT PABT 0909 NEW YORK NJ	3.5	jn	gd		3.50	0.00	-219.29	219.29	0.00	219.29	226.26	0.00

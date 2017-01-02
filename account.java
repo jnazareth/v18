@@ -65,7 +65,24 @@ public class account
 	private final int 	_FR = 0 ;
 	private final int	_TO = 1 ;
 
+	// control row
+	private final char 	CONTROL = '@' ;
+	//private final char 	USE_COLUMN = '+' ;
+	//private final char 	SKIP_COLUMN = '-' ;
+
+	private final String S_ITEM = "item" ;
+	private final String S_CATEGORY = "category" ;
+	private final String S_VENDOR = "vendor" ;
+	private final String S_DESC = "description" ;
+	private final String S_AMOUNT = "amount" ;
+	private final String S_FROM = "from" ;
+	private final String S_TO = "to" ;
+	private final String S_GROUP = "group" ;
+	private final String S_ACTION = "action" ;
+	private final String S_ACTION_QUOTE = "\"" ;
+
 	// input read positions
+	/*
 	private final int 	P_ITEM = 0 ;
 	private final int	P_CATEGORY = 1 ;
 	private final int 	P_VENDOR = 2 ;
@@ -75,6 +92,19 @@ public class account
 	private final int 	P_TO = 6 ;
 	private final int	P_GROUP = 7 ;
 	private final int	P_ACTION = 8 ;
+	*/
+
+	/**/
+	private int P_ITEM ;
+	private int	P_CATEGORY ;
+	private int P_VENDOR ;
+	private int	P_DESC ;
+	private int P_AMOUNT ;
+	private int	P_FROM ;
+	private int P_TO ;
+	private int	P_GROUP ;
+	private int	P_ACTION ;
+	/**/
 
 	//formatting strings
 	private final String lPAD = "lPad[" ;
@@ -1265,6 +1295,19 @@ public class account
 	}
 
 	// ----------------------------------------------------
+	// removeQuotes
+	// ----------------------------------------------------
+	public String removeQuotes(String inString)
+	{
+		// strip quotes from inString
+		StringBuilder sb = new StringBuilder(inString);
+		int q = -1 ;
+		while ((q = sb.indexOf(S_ACTION_QUOTE)) != -1) sb.deleteCharAt(q) ;
+		return sb.toString();
+	}
+
+
+	// ----------------------------------------------------
 	// ReadAndProcessTransactions
 	// ----------------------------------------------------
 	public void ReadAndProcessTransactions(String fileName, boolean bExport)
@@ -1283,51 +1326,73 @@ public class account
 
 			try {
 				while ((sLine = buffReader.readLine()) != null) {
-					// stream the input, one line at a time
-					StringTokenizer st = new StringTokenizer(sLine, READ_SEPARATOR);
-					int pos = 0 ;
-					String item="", category="", vendor="", desc="",amt="", from="", to="", group="", action="", def="" ;
-					while (st.hasMoreTokens()) {
-						switch (pos) {
-							case P_ITEM:
-								item = st.nextToken() ;
-								break ;
-							case P_CATEGORY:
-								category = st.nextToken() ;
-								break ;
-							case P_VENDOR:
-								vendor = st.nextToken() ;
-								break ;
-							case P_DESC:
-								desc = st.nextToken() ;
-								break ;
-							case P_AMOUNT:
-								amt = st.nextToken() ;
-								break ;
-							case P_FROM:
-								from = st.nextToken() ;
-								break ;
-							case P_TO:
-								to = st.nextToken() ;
-								break ;
-							case P_GROUP:
-								group = st.nextToken() ;
-								break ;
-							case P_ACTION:
-								action = st.nextToken() ;
-								break ;
-							default:
-								def = def + st.nextToken() ;
+
+				String item="", category="", vendor="", desc="", amt="", from="", to="", group="", action="", def="" ;
+				// stream the input, one line at a time
+				StringTokenizer st = new StringTokenizer(sLine, READ_SEPARATOR);
+				int pos = 0 ;
+
+				/* control implementation */
+					if (sLine.charAt(0) == CONTROL) { // control record, read
+						while (st.hasMoreTokens()) {
+							String sColumn = st.nextToken() ;
+							sColumn = sColumn.substring(sColumn.indexOf(CONTROL) + 1, sColumn.length()) ;
+							//System.out.println("sColumn:" + sColumn);
+
+							if (sColumn.compareToIgnoreCase(S_ITEM) == 0) 			P_ITEM = pos++ ;
+							else if (sColumn.compareToIgnoreCase(S_CATEGORY) == 0) 	P_CATEGORY = pos++ ;
+							else if (sColumn.compareToIgnoreCase(S_VENDOR) == 0) 	P_VENDOR = pos++ ;
+							else if (sColumn.compareToIgnoreCase(S_DESC) == 0) 		P_DESC = pos++ ;
+							else if (sColumn.compareToIgnoreCase(S_AMOUNT) == 0) 	P_AMOUNT = pos++ ;
+							else if (sColumn.compareToIgnoreCase(S_FROM) == 0) 		P_FROM = pos++ ;
+							else if (sColumn.compareToIgnoreCase(S_TO) == 0) 		P_TO = pos++ ;
+							else if (sColumn.compareToIgnoreCase(S_GROUP) == 0)		P_GROUP = pos++ ;
+							else if (sColumn.compareToIgnoreCase(S_ACTION) == 0) 	P_ACTION = pos++ ;
+							else pos++ ;
 						}
+						//System.out.println("P_ITEM:" + P_ITEM + ", P_CATEGORY:" + P_CATEGORY + ", P_VENDOR:" + P_VENDOR + ", P_DESC:" + P_DESC + ", P_AMOUNT:" + P_AMOUNT + ", P_FROM:" + P_FROM + ", P_TO:" + P_TO + ", P_GROUP:" + P_GROUP + ", P_ACTION:" + P_ACTION);
+						continue ;
+					}
+
+					while (st.hasMoreTokens()) {
+						if (pos == P_ITEM)
+							item = st.nextToken() ;
+						else if (pos == P_CATEGORY)
+							category = st.nextToken() ;
+						else if (pos == P_VENDOR)
+							vendor = st.nextToken() ;
+						else if (pos == P_DESC)
+							desc = st.nextToken() ;
+						else if (pos == P_AMOUNT)
+							amt = st.nextToken() ;
+						else if (pos == P_FROM) {
+							from = st.nextToken() ;
+							from = removeQuotes(from) ;
+						}
+						else if (pos == P_TO) {
+							to = st.nextToken() ;
+							to = removeQuotes(to) ;
+						}
+						else if (pos == P_GROUP)
+							group = st.nextToken() ;
+						else if (pos == P_ACTION) {
+							action = st.nextToken() ;
+							action = removeQuotes(action) ;
+						}
+						else def = def + st.nextToken() ;
 						pos++ ;
 					}
+
 					if (sLine.length() == 0) continue ;
 					if (item.charAt(0) == COMMENT) continue ; // comment, skip
+
+					//System.out.println("item:" + item + ", category:" + category + ", vendor:" + vendor + ", desc:" + desc + ", amt:" + amt + ", from:" + from + ", to:" + to + ", group:" + group + ", action:" + action);
 
 					if (group.length() == 0) group = DEFAULT_GROUP ;
 					ProcessTransaction(item, desc, amt, from, to, group, action, def) ;
 					//if (bExport) prepareToExport(item, category, vendor, desc, amt, from, to, action, def) ;
 					if (bExport) prepareToExportGroup(item, category, vendor, desc, amt, from, to, group, action, def) ;
+
 				} // end of while
 				buffReader.close() ;
 				////System.out.println("map: " + m_Transactions.toString()); // dump HashMap
